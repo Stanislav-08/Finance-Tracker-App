@@ -1,3 +1,4 @@
+import ConnectBankButton from "../components/banking/ConnectBankButton";
 import { supabase } from "../lib/supabase";
 
 function DashboardPage() {
@@ -24,6 +25,7 @@ function DashboardPage() {
         <p>
           Your financial overview will appear here.
         </p>
+        <ConnectBankButton />
       </section>
     </main>
   );

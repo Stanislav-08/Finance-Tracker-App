@@ -4,10 +4,10 @@ import {
   jwtVerify,
 } from "jose";
 
-const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
 
 if (!supabaseUrl) {
-  throw new Error("SUPABASE_URL is not defined");
+  throw new Error("VITE_SUPABASE_URL is not defined");
 }
 
 const JWKS = createRemoteJWKSet(
