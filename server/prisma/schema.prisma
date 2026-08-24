@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String         @id
+  email         String         @unique
+  accounts      Account[]
+  transactions  Transaction[]
+  subscriptions Subscription[]
+  budgets       Budget[]
+  savingsGoals  SavingsGoal[]
+}
+
+model Account {
+  id           String        @id @default(cuid())
+  userId       String
+  name         String
+  type         String
+  currency     String
+  balance      Decimal       @default(0)
+
+  user         User          @relation(fields: [userId], references: [id])
+  transactions Transaction[]
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  name         String
+  type         String
+
+  transactions Transaction[]
+  budgets      Budget[]
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  accountId   String
+  categoryId  String?
+  amount      Decimal
+  type        String
+  merchant    String?
+  description String?
+  date        DateTime
+  createdAt   DateTime @default(now())
+
+  user        User      @relation(fields: [userId], references: [id])
+  account     Account   @relation(fields: [accountId], references: [id])
+  category    Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Subscription {
+  id              String   @id @default(cuid())
+  userId          String
+  name            String
+  amount          Decimal
+  currency        String
+  billingCycle    String
+  nextPaymentDate DateTime
+  status          String
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Budget {
+  id         String  @id @default(cuid())
+  userId     String
+  categoryId String
+  amount     Decimal
+  month      Int
+  year       Int
+
+  category Category @relation(fields: [categoryId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+}
+
+model SavingsGoal {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  target      Decimal
+  current     Decimal  @default(0)
+  deadline    DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+}
