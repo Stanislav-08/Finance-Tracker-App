@@ -33,4 +33,4 @@ dist-ssr
 *.db-journal
 
 # Prisma agent files
-.agents/
+**/.agents/
