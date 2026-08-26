@@ -10,21 +10,21 @@ datasource db {
 model User {
   id            String         @id
   email         String         @unique
+  createdAt     DateTime       @default(now())
+  username      String         @unique
   accounts      Account[]
-  transactions  Transaction[]
-  subscriptions Subscription[]
   budgets       Budget[]
   savingsGoals  SavingsGoal[]
+  subscriptions Subscription[]
+  transactions  Transaction[]
 }
 
 model Account {
   id           String        @id @default(cuid())
   userId       String
   name         String
-  type         String
   currency     String
   balance      Decimal       @default(0)
-
   user         User          @relation(fields: [userId], references: [id])
   transactions Transaction[]
 }
@@ -33,13 +33,12 @@ model Category {
   id           String        @id @default(cuid())
   name         String
   type         String
-
-  transactions Transaction[]
   budgets      Budget[]
+  transactions Transaction[]
 }
 
 model Transaction {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   userId      String
   accountId   String
   categoryId  String?
@@ -48,11 +47,10 @@ model Transaction {
   merchant    String?
   description String?
   date        DateTime
-  createdAt   DateTime @default(now())
-
-  user        User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
   account     Account   @relation(fields: [accountId], references: [id])
   category    Category? @relation(fields: [categoryId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
 }
 
 model Subscription {
@@ -64,29 +62,26 @@ model Subscription {
   billingCycle    String
   nextPaymentDate DateTime
   status          String
-
-  user User @relation(fields: [userId], references: [id])
+  user            User     @relation(fields: [userId], references: [id])
 }
 
 model Budget {
-  id         String  @id @default(cuid())
+  id         String   @id @default(cuid())
   userId     String
   categoryId String
   amount     Decimal
   month      Int
   year       Int
-
-  category Category @relation(fields: [categoryId], references: [id])
-  user     User     @relation(fields: [userId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model SavingsGoal {
-  id          String   @id @default(cuid())
-  userId      String
-  name        String
-  target      Decimal
-  current     Decimal  @default(0)
-  deadline    DateTime?
-
-  user User @relation(fields: [userId], references: [id])
+  id       String    @id @default(cuid())
+  userId   String
+  name     String
+  target   Decimal
+  current  Decimal   @default(0)
+  deadline DateTime?
+  user     User      @relation(fields: [userId], references: [id])
 }

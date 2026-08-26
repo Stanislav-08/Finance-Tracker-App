@@ -1,4 +1,5 @@
-import AuthForm from "../components/auth/AuthForm.tsx";
+import AuthForm from "../layouts/components/auth/AuthForm.tsx";
+import "./AuthPage.css";
 
 function AuthPage() {
   return (
