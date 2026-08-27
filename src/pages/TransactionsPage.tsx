@@ -1,9 +1,13 @@
+import TransactionsTable from "../layouts/components/TransactionsTable.tsx";
 import "./TransactionsPage.css";
 
 function TransactionsPage() {
   return (
     <div className="transactions-page">
-      <h1>Transactions</h1>
+      <section className="page-title">
+        <h1>Transactions</h1>
+      </section>
+        <TransactionsTable />
     </div>
   );
 }

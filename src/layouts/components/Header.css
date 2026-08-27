@@ -4,7 +4,6 @@
     gap: 24px;
     align-items: space-between;
     flex-direction: column;
-    padding: 24px 24px 0 24px; 
 }
 .header-row{
     display: flex;
