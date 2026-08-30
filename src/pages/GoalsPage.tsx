@@ -73,7 +73,6 @@ function GoalsPage() {
         timeLeft: goal.deadline
           ? getTimeLeft(goal.deadline)
           : "No deadline",
-        iconSrc: "/src/assets/icons/calendar-icon.svg",
       };
 
       const widgetNode = addGoal(goalData);
