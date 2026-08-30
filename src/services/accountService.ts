@@ -28,6 +28,20 @@ export async function getTotalSavings(userId: string) {
   return data.totalSavings;
 }
 
+export async function getMonthlyContribution(userId: string) {
+  const response = await fetch(
+    `${API_URL}/api/accounts/monthly-contribution/${userId}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch monthly contribution");
+  }
+
+  const data = await response.json();
+
+  return data.monthlyContribution;
+}
+
 export async function getTransactions(userId: string) {
   const response = await fetch(
     `${API_URL}/api/accounts/transactions/${userId}`
@@ -40,4 +54,18 @@ export async function getTransactions(userId: string) {
   const data = await response.json();
 
   return data.transactions;
+}
+
+export async function getSavingsGoals(userId: string) {
+  const response = await fetch(
+    `${API_URL}/api/accounts/savings-goals/${userId}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch savings goals");
+  }
+
+  const data = await response.json();
+
+  return data.savingsGoals;
 }

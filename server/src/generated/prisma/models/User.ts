@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  monthlyContribution: runtime.Decimal | null
+}
+
+export type UserSumAggregateOutputType = {
+  monthlyContribution: runtime.Decimal | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -29,6 +39,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   createdAt: Date | null
   username: string | null
+  monthlyContribution: runtime.Decimal | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -36,6 +47,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   createdAt: Date | null
   username: string | null
+  monthlyContribution: runtime.Decimal | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -43,15 +55,25 @@ export type UserCountAggregateOutputType = {
   email: number
   createdAt: number
   username: number
+  monthlyContribution: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  monthlyContribution?: true
+}
+
+export type UserSumAggregateInputType = {
+  monthlyContribution?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
   createdAt?: true
   username?: true
+  monthlyContribution?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -59,6 +81,7 @@ export type UserMaxAggregateInputType = {
   email?: true
   createdAt?: true
   username?: true
+  monthlyContribution?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -66,6 +89,7 @@ export type UserCountAggregateInputType = {
   email?: true
   createdAt?: true
   username?: true
+  monthlyContribution?: true
   _all?: true
 }
 
@@ -107,6 +131,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -137,6 +173,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -146,7 +184,10 @@ export type UserGroupByOutputType = {
   email: string
   createdAt: Date
   username: string
+  monthlyContribution: runtime.Decimal
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -174,6 +215,7 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   username?: Prisma.StringFilter<"User"> | string
+  monthlyContribution?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
   savingsGoals?: Prisma.SavingsGoalListRelationFilter
@@ -186,6 +228,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  monthlyContribution?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   budgets?: Prisma.BudgetOrderByRelationAggregateInput
   savingsGoals?: Prisma.SavingsGoalOrderByRelationAggregateInput
@@ -201,6 +244,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  monthlyContribution?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
   savingsGoals?: Prisma.SavingsGoalListRelationFilter
@@ -213,9 +257,12 @@ export type UserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  monthlyContribution?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -226,6 +273,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
+  monthlyContribution?: Prisma.DecimalWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserCreateInput = {
@@ -233,6 +281,7 @@ export type UserCreateInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
@@ -245,6 +294,7 @@ export type UserUncheckedCreateInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
@@ -257,6 +307,7 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
@@ -269,6 +320,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -281,6 +333,7 @@ export type UserCreateManyInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -288,6 +341,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -295,6 +349,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -302,6 +357,11 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  monthlyContribution?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  monthlyContribution?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -309,6 +369,7 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  monthlyContribution?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -316,6 +377,11 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  monthlyContribution?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  monthlyContribution?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -329,6 +395,14 @@ export type StringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserCreateNestedOneWithoutAccountsInput = {
@@ -406,6 +480,7 @@ export type UserCreateWithoutAccountsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
@@ -417,6 +492,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -444,6 +520,7 @@ export type UserUpdateWithoutAccountsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
@@ -455,6 +532,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -466,6 +544,7 @@ export type UserCreateWithoutTransactionsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
@@ -477,6 +556,7 @@ export type UserUncheckedCreateWithoutTransactionsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
@@ -504,6 +584,7 @@ export type UserUpdateWithoutTransactionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
@@ -515,6 +596,7 @@ export type UserUncheckedUpdateWithoutTransactionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -526,6 +608,7 @@ export type UserCreateWithoutSubscriptionsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
@@ -537,6 +620,7 @@ export type UserUncheckedCreateWithoutSubscriptionsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
@@ -564,6 +648,7 @@ export type UserUpdateWithoutSubscriptionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
@@ -575,6 +660,7 @@ export type UserUncheckedUpdateWithoutSubscriptionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -586,6 +672,7 @@ export type UserCreateWithoutBudgetsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
@@ -597,6 +684,7 @@ export type UserUncheckedCreateWithoutBudgetsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   savingsGoals?: Prisma.SavingsGoalUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -624,6 +712,7 @@ export type UserUpdateWithoutBudgetsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
@@ -635,6 +724,7 @@ export type UserUncheckedUpdateWithoutBudgetsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   savingsGoals?: Prisma.SavingsGoalUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -646,6 +736,7 @@ export type UserCreateWithoutSavingsGoalsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
@@ -657,6 +748,7 @@ export type UserUncheckedCreateWithoutSavingsGoalsInput = {
   email: string
   createdAt?: Date | string
   username: string
+  monthlyContribution?: runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
@@ -684,6 +776,7 @@ export type UserUpdateWithoutSavingsGoalsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
@@ -695,6 +788,7 @@ export type UserUncheckedUpdateWithoutSavingsGoalsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  monthlyContribution?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
@@ -773,6 +867,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   createdAt?: boolean
   username?: boolean
+  monthlyContribution?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   budgets?: boolean | Prisma.User$budgetsArgs<ExtArgs>
   savingsGoals?: boolean | Prisma.User$savingsGoalsArgs<ExtArgs>
@@ -786,6 +881,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   createdAt?: boolean
   username?: boolean
+  monthlyContribution?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -793,6 +889,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   createdAt?: boolean
   username?: boolean
+  monthlyContribution?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -800,9 +897,10 @@ export type UserSelectScalar = {
   email?: boolean
   createdAt?: boolean
   username?: boolean
+  monthlyContribution?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "createdAt" | "username", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "createdAt" | "username" | "monthlyContribution", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   budgets?: boolean | Prisma.User$budgetsArgs<ExtArgs>
@@ -828,6 +926,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     createdAt: Date
     username: string
+    monthlyContribution: runtime.Decimal
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1260,6 +1359,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly username: Prisma.FieldRef<"User", 'String'>
+  readonly monthlyContribution: Prisma.FieldRef<"User", 'Decimal'>
 }
     
 

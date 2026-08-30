@@ -17,6 +17,8 @@ import GoalsPage from "./pages/GoalsPage";
 import BudgetPage from "./pages/BudgetPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import SettingsPage from "./pages/SettingsPage";
+import AddGoalPage from "./pages/AddGoalPage";
+import AllGoalsPage from "./pages/AllGoalsPage";
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -70,6 +72,16 @@ function App() {
             <Route
             path="/goals"
             element={<GoalsPage />}
+            />
+
+            <Route
+            path="/goals/add"
+            element={<AddGoalPage />}
+            />
+
+            <Route
+            path="/goals/all"
+            element={<AllGoalsPage />}
             />
 
             <Route

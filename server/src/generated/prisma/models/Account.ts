@@ -415,14 +415,6 @@ export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.AccountScalarWhereInput | Prisma.AccountScalarWhereInput[]
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type AccountCreateNestedOneWithoutTransactionsInput = {
   create?: Prisma.XOR<Prisma.AccountCreateWithoutTransactionsInput, Prisma.AccountUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.AccountCreateOrConnectWithoutTransactionsInput

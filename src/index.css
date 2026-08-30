@@ -29,3 +29,17 @@ textarea,
 select {
   font: inherit;
 }
+
+::-webkit-scrollbar {
+  width: 16px;
+  background-color: transparent;
+
+}
+::-webkit-scrollbar-track {
+  margin-block: 24px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 100vw;
+  border: 2px solid #ffffff;
+  background: #000000;
+}

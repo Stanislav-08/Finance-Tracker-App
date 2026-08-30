@@ -32,6 +32,19 @@ export async function getTotalSavings(userId: string) {
   );
 }
 
+export async function getMonthlyContribution(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      monthlyContribution: true,
+    },
+  });
+
+  return Number(user?.monthlyContribution ?? 0);
+}
+
 export async function getTransactions(userId: string) {
   const transactions = await prisma.transaction.findMany({
     where: {
@@ -54,4 +67,30 @@ export async function getTransactions(userId: string) {
   });
 
   return transactions;
+}
+
+export async function getSavingsGoals(userId: string) {
+  const savingsGoals = await prisma.savingsGoal.findMany({
+    where: {
+      userId,
+    },
+    select: {
+      id: true,
+      categoryId: true,
+      name: true,
+      target: true,
+      current: true,
+      deadline: true,
+      category: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      deadline: "asc",
+    },
+  });
+
+  return savingsGoals;
 }

@@ -1,7 +1,108 @@
-.wallet-page{
-    padding: 24px;
-    border-radius: 24px;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    width: 100%;
+.wallet-page {
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 30%;
+}
+
+.title-row {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-bottom: auto
+}
+
+.money-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-height: min-content;
+  padding: 0 8px;
+  margin-top: auto
+}
+
+.current-amount {
+  margin: 0;
+  font-size: 24px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.title-column {
+  display: flex;
+  gap: 0;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  height: min-content;
+  min-height: min-content;
+  max-height: min-content;
+}
+
+.goal-title {
+  margin: 0;
+}
+
+.goal-icon {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 24px;
+  background: #3276ff50;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.category-box {
+  background: #e5e7eb;
+  border-radius: 4px;
+  padding: 0 8px;
+  width: min-content;
+}
+
+.category {
+  font-size: 12px;
+}
+
+.progress-bar {
+  background: #e5e7eb;
+  height: 16px;
+  border-radius: 8px;
+  width: 100%;
+}
+.current-progress {
+  background: #3276ff;
+  width: 75%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.deadline-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto
+}
+
+.deadline-box {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.goal-percentage {
+  color: #3276ff;
 }

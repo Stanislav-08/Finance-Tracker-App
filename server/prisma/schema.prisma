@@ -12,6 +12,7 @@ model User {
   email         String         @unique
   createdAt     DateTime       @default(now())
   username      String         @unique
+  monthlyContribution Decimal        @default(0)
   accounts      Account[]
   budgets       Budget[]
   savingsGoals  SavingsGoal[]
@@ -77,11 +78,20 @@ model Budget {
 }
 
 model SavingsGoal {
-  id       String    @id @default(cuid())
-  userId   String
-  name     String
-  target   Decimal
-  current  Decimal   @default(0)
-  deadline DateTime?
-  user     User      @relation(fields: [userId], references: [id])
+  id           String         @id @default(cuid())
+  userId       String
+  categoryId   String
+  name         String
+  target       Decimal
+  current      Decimal        @default(0)
+  deadline     DateTime?
+
+  user         User           @relation(fields: [userId], references: [id])
+  category     SavingsCategory @relation(fields: [categoryId], references: [id])
+}
+
+model SavingsCategory {
+  id           String        @id @default(cuid())
+  name         String
+  savingsGoals SavingsGoal[]
 }

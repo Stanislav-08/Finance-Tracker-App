@@ -403,7 +403,8 @@ export const ModelName = {
   Transaction: 'Transaction',
   Subscription: 'Subscription',
   Budget: 'Budget',
-  SavingsGoal: 'SavingsGoal'
+  SavingsGoal: 'SavingsGoal',
+  SavingsCategory: 'SavingsCategory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -419,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "category" | "transaction" | "subscription" | "budget" | "savingsGoal"
+    modelProps: "user" | "account" | "category" | "transaction" | "subscription" | "budget" | "savingsGoal" | "savingsCategory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -941,6 +942,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SavingsCategory: {
+      payload: Prisma.$SavingsCategoryPayload<ExtArgs>
+      fields: Prisma.SavingsCategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SavingsCategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SavingsCategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.SavingsCategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SavingsCategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>
+        }
+        findMany: {
+          args: Prisma.SavingsCategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>[]
+        }
+        create: {
+          args: Prisma.SavingsCategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>
+        }
+        createMany: {
+          args: Prisma.SavingsCategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SavingsCategoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>[]
+        }
+        delete: {
+          args: Prisma.SavingsCategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>
+        }
+        update: {
+          args: Prisma.SavingsCategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.SavingsCategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SavingsCategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SavingsCategoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.SavingsCategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavingsCategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.SavingsCategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSavingsCategory>
+        }
+        groupBy: {
+          args: Prisma.SavingsCategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavingsCategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SavingsCategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavingsCategoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -984,7 +1059,8 @@ export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   createdAt: 'createdAt',
-  username: 'username'
+  username: 'username',
+  monthlyContribution: 'monthlyContribution'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1055,6 +1131,7 @@ export type BudgetScalarFieldEnum = (typeof BudgetScalarFieldEnum)[keyof typeof 
 export const SavingsGoalScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  categoryId: 'categoryId',
   name: 'name',
   target: 'target',
   current: 'current',
@@ -1062,6 +1139,14 @@ export const SavingsGoalScalarFieldEnum = {
 } as const
 
 export type SavingsGoalScalarFieldEnum = (typeof SavingsGoalScalarFieldEnum)[keyof typeof SavingsGoalScalarFieldEnum]
+
+
+export const SavingsCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type SavingsCategoryScalarFieldEnum = (typeof SavingsCategoryScalarFieldEnum)[keyof typeof SavingsCategoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1321,6 +1406,7 @@ export type GlobalOmitConfig = {
   subscription?: Prisma.SubscriptionOmit
   budget?: Prisma.BudgetOmit
   savingsGoal?: Prisma.SavingsGoalOmit
+  savingsCategory?: Prisma.SavingsCategoryOmit
 }
 
 /* Types for Logging */

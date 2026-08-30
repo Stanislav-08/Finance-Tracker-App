@@ -57,7 +57,8 @@ export const ModelName = {
   Transaction: 'Transaction',
   Subscription: 'Subscription',
   Budget: 'Budget',
-  SavingsGoal: 'SavingsGoal'
+  SavingsGoal: 'SavingsGoal',
+  SavingsCategory: 'SavingsCategory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -80,7 +81,8 @@ export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   createdAt: 'createdAt',
-  username: 'username'
+  username: 'username',
+  monthlyContribution: 'monthlyContribution'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -151,6 +153,7 @@ export type BudgetScalarFieldEnum = (typeof BudgetScalarFieldEnum)[keyof typeof 
 export const SavingsGoalScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  categoryId: 'categoryId',
   name: 'name',
   target: 'target',
   current: 'current',
@@ -158,6 +161,14 @@ export const SavingsGoalScalarFieldEnum = {
 } as const
 
 export type SavingsGoalScalarFieldEnum = (typeof SavingsGoalScalarFieldEnum)[keyof typeof SavingsGoalScalarFieldEnum]
+
+
+export const SavingsCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type SavingsCategoryScalarFieldEnum = (typeof SavingsCategoryScalarFieldEnum)[keyof typeof SavingsCategoryScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -52,3 +52,8 @@ export type Budget = Prisma.BudgetModel
  * 
  */
 export type SavingsGoal = Prisma.SavingsGoalModel
+/**
+ * Model SavingsCategory
+ * 
+ */
+export type SavingsCategory = Prisma.SavingsCategoryModel
