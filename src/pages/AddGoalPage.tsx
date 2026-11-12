@@ -1,9 +1,10 @@
+import NewGoalForm from "../layouts/components/widgets/SavingGoals/NewGoalForm";
 import "./AddGoalPage.css";
 
 function AddGoalPage() {
   return (
-    <div className="analytics-page">
-      <h1>AddGoal</h1>
+    <div className="add-goal-page">
+      <NewGoalForm />
     </div>
   );
 }

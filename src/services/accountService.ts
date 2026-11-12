@@ -69,3 +69,35 @@ export async function getSavingsGoals(userId: string) {
 
   return data.savingsGoals;
 }
+
+export async function createSavingsGoal(
+  userId: string,
+  name: string,
+  categoryId: string,
+  target: number,
+  deadline: string
+) {
+  const response = await fetch(
+    `${API_URL}/api/accounts/savings-goals/${userId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        categoryId,
+        target,
+        deadline,
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to create savings goal");
+  }
+
+  const data = await response.json();
+
+  return data.savingsGoal;
+}

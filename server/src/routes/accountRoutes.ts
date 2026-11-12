@@ -6,6 +6,7 @@ import {
   getMonthlyContribution,
   getTransactions,
   getSavingsGoals,
+  createSavingsGoal,
 } from "../services/account/accountService.js";
 
 const router = Router();
@@ -50,8 +51,7 @@ router.get("/monthly-contribution/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const monthlyContribution =
-      await getMonthlyContribution(userId);
+    const monthlyContribution = await getMonthlyContribution(userId);
 
     res.json({
       monthlyContribution,
@@ -97,6 +97,43 @@ router.get("/savings-goals/:userId", async (req, res) => {
 
     res.status(500).json({
       error: "Failed to get savings goals",
+    });
+  }
+});
+
+router.post("/savings-goals/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const {
+      name,
+      categoryId,
+      target,
+      deadline,
+    } = req.body;
+
+    if (!name || !categoryId || !target || !deadline) {
+      return res.status(400).json({
+        error: "Name, categoryId, target, and deadline are required",
+      });
+    }
+
+    const savingsGoal = await createSavingsGoal(
+      userId,
+      name,
+      categoryId,
+      Number(target),
+      new Date(deadline)
+    );
+
+    res.status(201).json({
+      savingsGoal,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: "Failed to create savings goal",
     });
   }
 });

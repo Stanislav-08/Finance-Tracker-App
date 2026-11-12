@@ -94,3 +94,37 @@ export async function getSavingsGoals(userId: string) {
 
   return savingsGoals;
 }
+
+export async function createSavingsGoal(
+  userId: string,
+  name: string,
+  categoryId: string,
+  target: number,
+  deadline: Date
+) {
+  const savingsGoal = await prisma.savingsGoal.create({
+    data: {
+      userId,
+      name,
+      categoryId,
+      target,
+      current: 0,
+      deadline,
+    },
+    select: {
+      id: true,
+      categoryId: true,
+      name: true,
+      target: true,
+      current: true,
+      deadline: true,
+      category: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
+  return savingsGoal;
+}

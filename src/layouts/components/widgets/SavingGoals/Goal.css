@@ -87,15 +87,17 @@
 .current-progress {
   height: 100%;
   border-radius: 8px;
-  min-width: 1%;
   transition: width 0.3s ease;
 }
 
 .deadline-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
   margin-top: auto;
+  min-width: min-content;
+  min-height: min-content;
 }
 
 .deadline-box {
@@ -104,4 +106,8 @@
   gap: 8px;
   justify-content: center;
   align-items: center;
+}
+
+.goal-percentage{
+  margin: 0;
 }
