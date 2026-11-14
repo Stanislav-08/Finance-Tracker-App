@@ -1,95 +1,34 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./Sidebar.css";
 import { supabase } from "../../lib/supabase";
+import "./Sidebar.css";
+
+const links = [
+  ["/dashboard", "Dashboard", "dashboard"], ["/transactions", "Transactions", "transactions"],
+  ["/wallet", "Wallet", "wallet"], ["/goals", "Goals", "goals"], ["/budget", "Budget", "budget"],
+  ["/subscriptions", "Subscriptions", "calendar"], ["/analytics", "Analytics", "analytics"], ["/settings", "Settings", "settings"],
+];
 
 export default function Sidebar() {
-async function handleLogout() {
-    await supabase.auth.signOut();
+  const [theme, setTheme] = useState(document.documentElement.dataset.theme ?? "light");
+  function toggle() {
+    const next = theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch { /* ignore */ }
+    setTheme(next);
   }
-
   return (
     <aside className="sidebar">
-  <div className="sidebar-logo">
-    <h2>Finance Tracker</h2>
-  </div>
-
-  <nav className="sidebar-nav">
-    <NavLink
-      to="/dashboard"
-      className={({ isActive }) =>
-        isActive ? "nav-item active" : "nav-item"
-      }
-    >
-    <img src="/src/assets/icons/dashboard-icon.svg" alt="Dashboard" className="item-icon" height="24" width="24"/>
-      Dashboard
-    </NavLink>
-
-    <NavLink
-      to="/transactions"
-      className={({ isActive }) =>
-        isActive ? "nav-item active" : "nav-item"
-      }
-    >
-    <img src="/src/assets/icons/transactions-icon.svg" alt="Transactions" className="item-icon" height="24" width="24"/>
-      Transactions
-    </NavLink>
-
-    <NavLink
-      to="/wallet"
-      className={({ isActive }) =>
-        isActive ? "nav-item active" : "nav-item"
-      }
-    >
-    <img src="/src/assets/icons/wallet-icon.svg" alt="Wallet" className="item-icon" height="24" width="24"/>
-      Wallet
-    </NavLink>
-
-    <NavLink
-      to="/goals"
-      className={({ isActive }) =>
-        isActive ? "nav-item active" : "nav-item"
-      }
-    >
-    <img src="/src/assets/icons/goals-icon.svg" alt="Goals" className="item-icon" height="24" width="24"/>
-      Goals
-    </NavLink>
-
-    <NavLink
-      to="/budget"
-      className={({ isActive }) =>
-        isActive ? "nav-item active" : "nav-item"
-      }
-    >
-    <img src="/src/assets/icons/budget-icon.svg" alt="Budget" className="item-icon" height="24" width="24"/>
-      Budget
-    </NavLink>
-
-    <NavLink
-      to="/analytics"
-      className={({ isActive }) =>
-        isActive ? "nav-item active" : "nav-item"
-      }
-    >
-    <img src="/src/assets/icons/analytics-icon.svg" alt="Analytics" className="item-icon" height="24" width="24"/>
-      Analytics
-    </NavLink>
-
-    <NavLink
-      to="/settings"
-      className={({ isActive }) =>
-        isActive ? "nav-item active" : "nav-item"
-      }
-    >
-    <img src="/src/assets/icons/settings-icon.svg" alt="Settings" className="item-icon" height="24" width="24"/>
-      Settings
-    </NavLink>
-  </nav>
-  <button
-        className="logout-button"
-        onClick={handleLogout}
-      >
-        Log out
-      </button>
-</aside>
+      <div className="sidebar-logo"><h2>Finance Tracker</h2></div>
+      <nav className="sidebar-nav">
+        {links.map(([to, label, icon]) => (
+          <NavLink key={to} to={to} className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
+            <img src={`/icons/${icon}-icon.svg`} alt="" className="item-icon" width="22" height="22" />{label}
+          </NavLink>
+        ))}
+      </nav>
+      <button className="theme-button" onClick={toggle}>{theme === "dark" ? "☀ Light mode" : "☾ Dark mode"}</button>
+      <button className="logout-button" onClick={() => supabase.auth.signOut()}>Log out</button>
+    </aside>
   );
 }

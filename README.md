@@ -1,32 +1,24 @@
-# React + TypeScript + Vite
+# Finance Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + Vite frontend, Express + Prisma API, Supabase (Auth + Postgres).
 
-Currently, two official plugins are available:
+## 1. Database
+Supabase dashboard → **SQL Editor** → paste `supabase/setup.sql` → Run.
+It creates all tables, seeds categories, adds the sign-up trigger, and enables RLS.
+(Don't also run `prisma migrate` against the same database — the SQL file replaces it.)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 2. Environment
+- Root: copy `.env.example` → `.env` (Supabase URL + publishable/anon key, `VITE_API_URL`).
+- `server/`: copy `.env.example` → `.env` (DB connection strings from Supabase → Connect).
+- Supabase → Authentication → Providers → Email: turn off "Confirm email" for local testing.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## 3. Run
+```bash
+npm install && npm run dev                 # frontend  http://localhost:5173
+cd server && npm install && npx prisma generate && npm run dev   # API  http://localhost:5000
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Deploy on Vercel (two projects, one GitHub repo)
+1. **API** — New Project → import repo → Root Directory `server`. Env vars: `DATABASE_URL`, `VITE_SUPABASE_URL`, `CLIENT_ORIGIN` (your frontend URL, no trailing slash).
+2. **Frontend** — New Project → import repo → Root Directory `.` (Vite preset). Env vars: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_API_URL` (your API project URL).
+3. Supabase → Authentication → URL Configuration: set Site URL to the frontend URL.

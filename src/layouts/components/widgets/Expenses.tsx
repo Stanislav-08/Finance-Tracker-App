@@ -2,7 +2,7 @@ import "./Widgets.css"
 import { useDashboardData } from "../../../hooks/useDashboardData";
 
 function Expenses() {
-    const { expenses } = useDashboardData();
+    const { expenses, expenseChange } = useDashboardData();
 
   return (
   <div className="expenses widget">
@@ -17,7 +17,7 @@ function Expenses() {
             <div className="card-box">
               <div className="percentage-box">
                 <span className="card-percentage">
-                  2%
+                  {expenseChange}%
                 </span>
               </div>
 

@@ -15,72 +15,72 @@ const categories: Category[] = [
   {
     id: "1",
     name: "Business",
-    icon: "/src/assets/icons/business-icon.svg",
+    icon: "/icons/business-icon.svg",
   },
   {
     id: "2",
     name: "Car",
-    icon: "/src/assets/icons/car-icon.svg",
+    icon: "/icons/car-icon.svg",
   },
   {
     id: "3",
     name: "Education",
-    icon: "/src/assets/icons/education-icon.svg",
+    icon: "/icons/education-icon.svg",
   },
   {
     id: "4",
     name: "Emergency",
-    icon: "/src/assets/icons/emergency-icon.svg",
+    icon: "/icons/emergency-icon.svg",
   },
   {
     id: "5",
     name: "Family",
-    icon: "/src/assets/icons/family-icon.svg",
+    icon: "/icons/family-icon.svg",
   },
   {
     id: "6",
     name: "Health",
-    icon: "/src/assets/icons/health-icon.svg",
+    icon: "/icons/health-icon.svg",
   },
   {
     id: "7",
     name: "Home",
-    icon: "/src/assets/icons/home-icon.svg",
+    icon: "/icons/home-icon.svg",
   },
   {
     id: "8",
     name: "Investment",
-    icon: "/src/assets/icons/investment-icon.svg",
+    icon: "/icons/investment-icon.svg",
   },
   {
     id: "9",
     name: "Leisure",
-    icon: "/src/assets/icons/leisure-icon.svg",
+    icon: "/icons/leisure-icon.svg",
   },
   {
     id: "14",
     name: "Travel",
-    icon: "/src/assets/icons/travel-icon.svg",
+    icon: "/icons/travel-icon.svg",
   },
   {
     id: "11",
     name: "Major purchase",
-    icon: "/src/assets/icons/major-purchase-icon.svg",
+    icon: "/icons/major-purchase-icon.svg",
   },
   {
     id: "13",
     name: "Short term",
-    icon: "/src/assets/icons/short-term-icon.svg",
+    icon: "/icons/short-term-icon.svg",
   },
   {
     id: "10",
     name: "Long term",
-    icon: "/src/assets/icons/long-term-icon.svg",
+    icon: "/icons/long-term-icon.svg",
   },
   {
     id: "12",
     name: "Other",
-    icon: "/src/assets/icons/other-icon.svg",
+    icon: "/icons/other-icon.svg",
   },
 ];
 

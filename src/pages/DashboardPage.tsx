@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+import { getTransactions } from "../services/accountService";
+import MoneyFlowChart from "../layouts/components/MoneyFlowChart";
 import Header from "../layouts/components/Header";
 import "./DashboardPage.css";
 import TransactionsTable from "../layouts/components/TransactionsTable.tsx";
@@ -8,6 +12,10 @@ import Expenses from "../layouts/components/widgets/Expenses.tsx";
 import TotalSavings from "../layouts/components/widgets/TotalSavings.tsx";
 
 function DashboardPage() {
+  const [txs, setTxs] = useState<any[]>([]);
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => user && getTransactions(user.id)).then((t) => t && setTxs(t)).catch(console.error);
+  }, []);
 
   return (
     <div className="dashboard-page">
@@ -21,6 +29,7 @@ function DashboardPage() {
       <div className="money-row row">
         <div className="money-flow card">
           <h3>Money flow</h3>
+          <MoneyFlowChart transactions={txs} />
         </div>
         <div className="budget card">
           <h3>Budget</h3>

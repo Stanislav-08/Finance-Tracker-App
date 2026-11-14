@@ -10,7 +10,7 @@ const PORT = Number(process.env.PORT) || 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (process.env.CLIENT_ORIGIN ?? "http://localhost:5173").split(","),
   }),
 );
 
@@ -25,6 +25,10 @@ app.use("/api/banking", bankingRouter);
 
 app.use("/api/accounts", accountRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+export default app;

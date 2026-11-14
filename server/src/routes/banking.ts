@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { requireAuth } from "../middleware/auth.middleware.js";
 
 import {
   createAuthUrl,
@@ -10,7 +11,7 @@ import {
 
 const router = Router();
 
-router.get("/connect", (_req, res) => {
+router.get("/connect", requireAuth, (_req, res) => {
   try {
     const url = createAuthUrl();
 

@@ -18,23 +18,23 @@ function getCategoryIcon(category: string): string {
     .trim();
 
   const icons: Record<string, string> = {
-    emergency: "/src/assets/icons/emergency-icon.svg",
-    "long term": "/src/assets/icons/long-term-icon.svg",
-    "short term": "/src/assets/icons/short-term-icon.svg",
-    "major purchase": "/src/assets/icons/major-purchase-icon.svg",
-    travel: "/src/assets/icons/travel-icon.svg",
-    education: "/src/assets/icons/education-icon.svg",
-    home: "/src/assets/icons/home-icon.svg",
-    car: "/src/assets/icons/car-icon.svg",
-    health: "/src/assets/icons/health-icon.svg",
-    investment: "/src/assets/icons/investment-icon.svg",
-    leisure: "/src/assets/icons/leisure-icon.svg",
-    family: "/src/assets/icons/family-icon.svg",
-    business: "/src/assets/icons/business-icon.svg",
-    other: "/src/assets/icons/other-icon.svg",
+    emergency: "/icons/emergency-icon.svg",
+    "long term": "/icons/long-term-icon.svg",
+    "short term": "/icons/short-term-icon.svg",
+    "major purchase": "/icons/major-purchase-icon.svg",
+    travel: "/icons/travel-icon.svg",
+    education: "/icons/education-icon.svg",
+    home: "/icons/home-icon.svg",
+    car: "/icons/car-icon.svg",
+    health: "/icons/health-icon.svg",
+    investment: "/icons/investment-icon.svg",
+    leisure: "/icons/leisure-icon.svg",
+    family: "/icons/family-icon.svg",
+    business: "/icons/business-icon.svg",
+    other: "/icons/other-icon.svg",
   };
 
-  return icons[normalizedCategory] || "/src/assets/icons/other-icon.svg";
+  return icons[normalizedCategory] || "/icons/other-icon.svg";
 }
 
 /**
@@ -199,7 +199,7 @@ export function addGoal(
     document.createElement("img");
 
   deadlineIcon.src =
-    "/src/assets/icons/calendar-icon.svg";
+    "/icons/calendar-icon.svg";
 
   deadlineIcon.alt = "Calendar";
   deadlineIcon.className = "item-icon";

@@ -22,6 +22,8 @@ export function useDashboardData() {
   const [monthlyContribution, setMonthlyContribution] = useState(0);
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
+  const [incomeChange, setIncomeChange] = useState(0);
+  const [expenseChange, setExpenseChange] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -71,6 +73,17 @@ export function useDashboardData() {
             0
           );
 
+        const now = new Date();
+        const sum = (t: string, off: number) => transactions
+          .filter((x: Transaction) => {
+            const d = new Date(x.date);
+            const ref = new Date(now.getFullYear(), now.getMonth() - off, 1);
+            return x.type === t && d.getFullYear() === ref.getFullYear() && d.getMonth() === ref.getMonth();
+          })
+          .reduce((a: number, x: Transaction) => a + Number(x.amount), 0);
+        const pct = (c: number, p: number) => (p > 0 ? Math.round(((c - p) / p) * 100) : 0);
+        setIncomeChange(pct(sum("income", 0), sum("income", 1)));
+        setExpenseChange(pct(sum("expense", 0), sum("expense", 1)));
         setIncome(totalIncome);
         setExpenses(totalExpenses);
       } catch (error) {
@@ -92,6 +105,8 @@ export function useDashboardData() {
     monthlyContribution,
     income,
     expenses,
+    incomeChange,
+    expenseChange,
     loading,
   };
 }

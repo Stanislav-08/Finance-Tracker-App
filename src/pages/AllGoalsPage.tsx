@@ -1,6 +1,6 @@
 import "./AllGoalsPage.css";
 import { useEffect, useState } from "react";
-import { getSavingsGoals } from "../services/accountService";
+import { depositToGoal, getSavingsGoals } from "../services/accountService";
 import { supabase } from "../lib/supabase";
 
 interface SavingsGoal {
@@ -18,6 +18,15 @@ interface SavingsGoal {
 function AllGoalsPage() {
   const [goals, setGoals] = useState<SavingsGoal[]>([]);
   const [loading, setLoading] = useState(true);
+
+  async function deposit(goalId: string) {
+    const v = Number(prompt("Amount to add (€):"));
+    if (!(v > 0)) return;
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    await depositToGoal(user.id, goalId, v);
+    setGoals(await getSavingsGoals(user.id));
+  }
 
   useEffect(() => {
     async function loadGoals() {
@@ -109,6 +118,7 @@ function AllGoalsPage() {
                 </div>
 
                 <div className="goal-footer">
+                  <button onClick={() => deposit(goal.id)}>Add money</button>
                   <span>
                     {goal.deadline
                       ? new Date(

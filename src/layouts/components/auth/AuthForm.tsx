@@ -2,6 +2,7 @@ import { useState } from "react";
 import { supabase } from "../../../lib/supabase";
 
 function AuthForm() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,6 +22,7 @@ function AuthForm() {
       const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: { data: { username } },
       });
 
       if (error) {
@@ -54,6 +56,12 @@ function AuthForm() {
         className="auth-form"
         onSubmit={handleSubmit}
       >
+        {isRegistering && (
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input id="username" value={username} onChange={(e) => setUsername(e.target.value)} required minLength={3} maxLength={30} />
+          </div>
+        )}
         <div className="form-group">
           <label htmlFor="email">
             Email
